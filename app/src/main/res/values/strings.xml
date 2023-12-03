@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">L4_andro</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="header_title">Here are all the fragments:</string>
+    <string name="header_icon_alt">Header drawer icon</string>
+    <string name="menuC">Main fragment</string>
+    <string name="menuL">Swipe fragment</string>
+    <string name="menuR">List fragment</string>
+
+
+    <string name="fragmentAdd">Add new item:</string>
+    <string name="fragmentShow">Fragment showing data</string>
+    <string name="commonButton">Go</string>
+    <string name="td">TODO</string>
+    <string name="op1">Option 1</string>
+    <string name="op2">Option 2</string>
+    <string name="results">Here data/results</string>
+    <string name="fragmentMain">Fragment to start on</string>
+    <string name="fragmentSwipe">Fragment with tabs</string>
+    <string name="fragmentList">Fragment with list</string>
+    <string name="fragmentTab1">Fragment with tab2</string>
+    <string name="fragmentTab2">Fragment with tab1</string>
+    <string name="fragmentExtra">Fragment not applied</string>
+
+    <string name="fragment_main">Fragment to start on</string>
+    <string name="author_name_txt">Jakub</string>
+    <string name="author_surname_txt">Cebula</string>
+    <string name="author_email_txt">266886@student.pwr.edu.pl</string>
+
+    <string name="invitation_txt">Invitation:</string>
+    <string name="author_name_prompt">Name:</string>
+    <string name="author_surname_prompt">Surname:</string>
+    <string name="author_email_prompt">Email:</string>
+
+    <string name="tab_layout_desc">This is tab layout</string>
+
+    <string name="def_item_title">This is human 1</string>
+    <string name="def_item_spec1">Human</string>
+    <string name="def_item_spec2">NPC</string>
+    <string name="def_item_spec3">Orc</string>
+    <string name="add_item">Add item</string>
+
+
+    <string name="return_button">Return</string>
+    <string name="save_button">Save</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="show_danger">Is dangerous?</string>
+    <string name="show_strength">Strength</string>
+    <string name="show_spec">Here add specific info</string>
+
+    <string name="img1">String 1</string>
+    <string name="img2">String 2</string>
+    <string name="img3">String 3</string>
+    <string name="radio_tab">Change last text</string>
+
+
+</resources>

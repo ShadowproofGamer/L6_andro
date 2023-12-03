@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/swipe_frag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/chevron_left"
+        android:title="@string/menuL"
+
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/main_frag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/chevron_up"
+        android:title="@string/menuC"
+
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/list_frag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/chevron_right"
+        android:title="@string/menuR"
+
+        app:showAsAction="ifRoom" />
+</menu>

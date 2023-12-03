@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    android:label="List fragment"
+    app:startDestination="@id/main_frag">
+
+    <fragment
+        android:id="@+id/list_frag"
+        android:name="com.example.l5_andro.ListFragment"
+        android:label="List fragment"
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/action_listFragment_to_showFragment"
+            app:destination="@id/show_frag" />
+        <action
+            android:id="@+id/action_listFragment_to_addFragment"
+            app:destination="@id/add_frag" />
+    </fragment>
+    <fragment
+        android:id="@+id/add_frag"
+        android:name="com.example.l5_andro.AddFragment"
+        android:label="Add element"
+        tools:layout="@layout/fragment_add" />
+    <fragment
+        android:id="@+id/swipe_frag"
+        android:name="com.example.l5_andro.SwipeFragment"
+        android:label="Swipe fragment"
+        tools:layout="@layout/fragment_swipe" />
+    <fragment
+        android:id="@+id/show_frag"
+        android:name="com.example.l5_andro.ShowFragment"
+        android:label="Element data"
+        tools:layout="@layout/fragment_show" />
+    <fragment
+        android:id="@+id/main_frag"
+        android:name="com.example.l5_andro.MainFragment"
+        android:label="Main fragment"
+        tools:layout="@layout/fragment_main" />
+    <action
+        android:id="@+id/action_global_listFragment"
+        app:destination="@id/list_frag"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/main_frag" />
+    <action
+        android:id="@+id/action_global_mainFragment"
+        app:destination="@id/main_frag"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/main_frag" />
+    <action
+        android:id="@+id/action_global_swipeFragment"
+        app:destination="@id/swipe_frag"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/main_frag" />
+    <fragment
+        android:id="@+id/fragment1"
+        android:name="com.example.l5_andro.Fragment1"
+        android:label="fragment_1"
+        tools:layout="@layout/fragment_1" />
+    <fragment
+        android:id="@+id/fragment2"
+        android:name="com.example.l5_andro.Fragment2"
+        android:label="fragment_2"
+        tools:layout="@layout/fragment_2" />
+</navigation>
