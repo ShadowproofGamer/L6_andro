@@ -67,4 +67,19 @@
         app:destination="@id/list_frag"
         app:launchSingleTop="true"
         app:popUpTo="@id/main_frag" />
+    <fragment
+        android:id="@+id/image_frag"
+        android:name="com.example.l5_andro.ImageFragment"
+        android:label="fragment_image"
+        tools:layout="@layout/fragment_image" />
+    <fragment
+        android:id="@+id/image_swipe_frag"
+        android:name="com.example.l5_andro.ImageSwipeFragment"
+        android:label="fragment_image_swipe"
+        tools:layout="@layout/fragment_image_swipe" />
+    <action
+        android:id="@+id/action_global_imageSwipeFragment"
+        app:destination="@id/image_swipe_frag"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/main_frag" />
 </navigation>

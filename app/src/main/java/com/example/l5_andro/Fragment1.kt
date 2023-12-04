@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import com.example.l5_andro.databinding.Fragment1Binding
 
 class Fragment1 : Fragment() {
@@ -53,10 +54,11 @@ class Fragment1 : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        data = requireActivity().getSharedPreferences("L4_preferences", Context.MODE_PRIVATE)
+        data = requireActivity().getSharedPreferences("L5_preferences", Context.MODE_PRIVATE)
         invitation.setText(data.getString("invitation", "Fragment to start on"))
         authorName.setText(data.getString("authorName", "Jakub"))
         authorSurname.setText(data.getString("authorSurname", "Cebula"))
+
 
 
         saveButton.setOnClickListener { _ ->

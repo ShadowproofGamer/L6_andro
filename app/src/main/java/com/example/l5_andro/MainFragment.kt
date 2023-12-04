@@ -41,7 +41,7 @@ class MainFragment : Fragment() {
         return view.root
     }
     fun applyData(){
-        val data: SharedPreferences = requireActivity().getSharedPreferences("L4_preferences", Context.MODE_PRIVATE)
+        val data: SharedPreferences = requireActivity().getSharedPreferences("L5_preferences", Context.MODE_PRIVATE)
         invitation.text = data.getString("invitation", "Fragment to start on")
         authorName.text = data.getString("authorName", "Jakub")
         authorSurname.text = data.getString("authorSurname", "Cebula")
