@@ -32,4 +32,9 @@ class MyRepository(context: Context) {
     fun deleteItem(item: DBItem) : Boolean {
         return myDao.delete(item) > 0
     }
+
+    //modifying item
+    fun modifyItem(item: DBItem): Boolean {
+        return myDao.update(item) > 0
+    }
 }

@@ -41,6 +41,16 @@ class DBItem {
         dangerous = danger
 
     }
+
+    constructor(iden:Int, name: String, spec:String, strength:Float, type:String, danger:Boolean) : this() {
+        id = iden
+        text_name = name
+        text_spec = spec
+        item_strength = strength
+        item_type = type
+        dangerous = danger
+
+    }
 }
 
 

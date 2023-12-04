@@ -20,7 +20,11 @@
         android:id="@+id/show_frag"
         android:name="com.example.l5_andro.ShowFragment"
         android:label="Element data"
-        tools:layout="@layout/fragment_show" />
+        tools:layout="@layout/fragment_show" >
+        <action
+            android:id="@+id/action_show_frag_to_add_frag"
+            app:destination="@id/add_frag" />
+    </fragment>
     <fragment
         android:id="@+id/main_frag"
         android:name="com.example.l5_andro.MainFragment"

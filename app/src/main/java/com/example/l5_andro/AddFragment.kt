@@ -24,6 +24,10 @@ class AddFragment : Fragment() {
     lateinit var saveButton: Button
     lateinit var cancelButton: Button
 
+    //says if modification or addition
+    var mod = false
+    var itemId = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +48,7 @@ class AddFragment : Fragment() {
         addType = _binding.addRadio
         addDanger = _binding.addDanger
         saveButton = _binding.addSaveButton
-        cancelButton=_binding.addCancelButton
+        cancelButton = _binding.addCancelButton
 
 
         return _binding.root
@@ -52,43 +56,109 @@ class AddFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //changing race depending on item checked
+
         var race: String = "Human"
+
+        //allowing for modifications
+        parentFragmentManager.setFragmentResultListener("modmsg", viewLifecycleOwner) { _, bundle ->
+            run {
+                mod = true
+                addName.setText(bundle.getString("name"))
+                addSpec.setText(bundle.getString("spec"))
+                addDanger.isChecked = bundle.getBoolean("danger")
+                addStrength.progress = bundle.getFloat("strength").toInt()
+                when (bundle.getString("type")) {
+                    "Human" -> _binding.addTypeHuman.isChecked = true
+                    "NPC" -> _binding.addTypeNPC.isChecked = true
+                    "Orc" -> _binding.addTypeOrc.isChecked = true
+                    else -> _binding.addTypeHuman.isChecked = true
+                }
+                itemId = bundle.getInt("id")
+                race = bundle.getString("type").toString()
+            }
+        }
+
+
+        //changing race depending on item checked
+
         addType.setOnCheckedChangeListener { group, checkedId ->
-            when(checkedId){
-                _binding.addTypeHuman.id -> race="Human"
-                _binding.addTypeNPC.id -> race="NPC"
-                _binding.addTypeOrc.id -> race="Orc"
-            } }
+            when (checkedId) {
+                _binding.addTypeHuman.id -> race = "Human"
+                _binding.addTypeNPC.id -> race = "NPC"
+                _binding.addTypeOrc.id -> race = "Orc"
+            }
+        }
 
         //going back without changes
         cancelButton.setOnClickListener {
-            parentFragmentManager.setFragmentResult("addNewItem", bundleOf(
-                "toAdd" to false
+            parentFragmentManager.setFragmentResult(
+                "addNewItem", bundleOf(
+                    "toAdd" to false
                 )
             )
+
+            //for mods
+            parentFragmentManager.setFragmentResult(
+                "addmodmsg", bundleOf(
+                    "name" to addName.text.toString(),
+                    "spec" to addSpec.text.toString(),
+                    "strength" to addStrength.rating*2,
+                    "danger" to addDanger.isChecked,
+                    "type" to race,
+                    "toAdd" to false,
+                    "id" to itemId,
+                    "toChange" to false
+                )
+            )
+
             requireActivity().onBackPressed()
         }
 
         //going back with changes
         saveButton.setOnClickListener {
-            val name:String = if (addName.text.toString()==""){"Default name"}else{ addName.text.toString()}
-            val spec:String = if (addSpec.text.toString()==""){"Default spec"}else{ addSpec.text.toString()}
-         parentFragmentManager.setFragmentResult("addNewItem", bundleOf(
-            "name" to name,
-            "spec" to spec,
-            "strength" to addStrength.rating,
-            "danger" to addDanger.isChecked,
-            "type" to race,
-            "toAdd" to true
-            )
-        )
+            val name: String = if (addName.text.toString() == "") {
+                "Default name"
+            } else {
+                addName.text.toString()
+            }
+            val spec: String = if (addSpec.text.toString() == "") {
+                "Default spec"
+            } else {
+                addSpec.text.toString()
+            }
+            if (mod) {
+                parentFragmentManager.setFragmentResult(
+                    "addmodmsg", bundleOf(
+                        "name" to name,
+                        "spec" to spec,
+                        "strength" to addStrength.rating,
+                        "danger" to addDanger.isChecked,
+                        "type" to race,
+                        "toAdd" to false,
+                        "id" to itemId,
+                        "toChange" to true
+                    )
+                )
+            } else {
+                parentFragmentManager.setFragmentResult(
+                    "addNewItem", bundleOf(
+                        "name" to name,
+                        "spec" to spec,
+                        "strength" to addStrength.rating,
+                        "danger" to addDanger.isChecked,
+                        "type" to race,
+                        "toAdd" to true,
+                        "toChange" to false
+                    )
+                )
+            }
             requireActivity().onBackPressed()
-         }
-
+        }
 
 
     }
+
+
 
     companion object {
         @JvmStatic
