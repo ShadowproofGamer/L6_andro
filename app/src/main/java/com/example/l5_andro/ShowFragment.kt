@@ -12,16 +12,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.example.l5_andro.databinding.FragmentShowBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ShowFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ShowFragment : Fragment() {
     private lateinit var _binding: FragmentShowBinding
     lateinit var showName: TextView

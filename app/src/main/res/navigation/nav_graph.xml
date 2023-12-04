@@ -7,18 +7,6 @@
     app:startDestination="@id/main_frag">
 
     <fragment
-        android:id="@+id/list_frag"
-        android:name="com.example.l5_andro.ListFragment"
-        android:label="List fragment"
-        tools:layout="@layout/fragment_list">
-        <action
-            android:id="@+id/action_listFragment_to_showFragment"
-            app:destination="@id/show_frag" />
-        <action
-            android:id="@+id/action_listFragment_to_addFragment"
-            app:destination="@id/add_frag" />
-    </fragment>
-    <fragment
         android:id="@+id/add_frag"
         android:name="com.example.l5_andro.AddFragment"
         android:label="Add element"
@@ -39,11 +27,6 @@
         android:label="Main fragment"
         tools:layout="@layout/fragment_main" />
     <action
-        android:id="@+id/action_global_listFragment"
-        app:destination="@id/list_frag"
-        app:launchSingleTop="true"
-        app:popUpTo="@id/main_frag" />
-    <action
         android:id="@+id/action_global_mainFragment"
         app:destination="@id/main_frag"
         app:launchSingleTop="true"
@@ -63,4 +46,21 @@
         android:name="com.example.l5_andro.Fragment2"
         android:label="fragment_2"
         tools:layout="@layout/fragment_2" />
+    <fragment
+        android:id="@+id/list_frag"
+        android:name="com.example.l5_andro.List4Fragment"
+        android:label="fragment_list4"
+        tools:layout="@layout/fragment_list4" >
+        <action
+            android:id="@+id/action_list_frag_to_show_frag"
+            app:destination="@id/show_frag" />
+        <action
+            android:id="@+id/action_list_frag_to_add_frag"
+            app:destination="@id/add_frag" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_list4Fragment"
+        app:destination="@id/list_frag"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/main_frag" />
 </navigation>

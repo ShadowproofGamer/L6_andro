@@ -1,5 +1,6 @@
 package com.example.l5_andro
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,20 +18,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.l5_andro.databinding.FragmentListBinding
 import com.example.l5_andro.databinding.ListItemBinding
 
-
-
-class ListFragment : Fragment() {
-
+class List4Fragment : Fragment() {
 
     private lateinit var _binding: FragmentListBinding
-    val dataRepo = DataRepo.getInstance()
-    //val dataRepo = MyRepository.getinstance()
-    //val adapter = MyAdapter(dataRepo.getData())
+    //val dataRepo = DataRepo.getInstance()
+    lateinit var dataRepo: MyRepository
+    lateinit var adapter:MyAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
         }
+        dataRepo = MyRepository.getinstance(requireContext())
+        adapter = MyAdapter(dataRepo.getData()!!)
 
     }
 
@@ -42,7 +43,7 @@ class ListFragment : Fragment() {
         val recView = _binding.recView
         recView.layoutManager = LinearLayoutManager(requireContext())
 
-        val adapter = DataRepo.getInstance().getData()?.let { MyAdapter(it) }
+        //val adapter = DataRepo.getInstance().getData()?.let { MyAdapter(it) }
         recView.adapter = adapter
 
         return _binding.root
@@ -71,8 +72,8 @@ class ListFragment : Fragment() {
                     val itemStrength = bundle.getFloat("strength", 1.0F)
                     val itemDanger = bundle.getBoolean("danger", false)
                     val itemType = bundle.getString("type", "Human")
-                    val newItem = DataItem(itemName, itemSpec, itemStrength, itemType, itemDanger)
-                    dataRepo.addItem(newItem)
+                    val newItem = DBItem(itemName, itemSpec, itemStrength, itemType, itemDanger)
+                    adapter.addItem(newItem)
                 }
             }
         }
@@ -96,7 +97,7 @@ class ListFragment : Fragment() {
     }
 
 
-    inner class MyAdapter(var data: MutableList<DataItem>) :
+    inner class MyAdapter(var data: MutableList<DBItem>) :
         RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
         inner class MyViewHolder(viewBinding : ListItemBinding) :
             RecyclerView.ViewHolder(viewBinding.root) {
@@ -114,13 +115,19 @@ class ListFragment : Fragment() {
         override fun getItemCount(): Int {
             return data.size
         }
+        fun addItem(item:DBItem):Boolean{
+            if (dataRepo.addItem(item))
+                notifyDataSetChanged()
+                requireActivity().recreate()
+                return true
+        }
 
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             var currData = data[position]
             holder.txt1.text = currData.text_name
             holder.txt2.text = if (currData.text_spec=="Default specification"){
                 (currData.item_type + " " + currData.text_spec +" "+ currData.item_strength)
-                }else{currData.text_spec}
+            }else{currData.text_spec}
             holder.itemView.setOnClickListener {
                 parentFragmentManager.setFragmentResult("msgtochild", bundleOf(
                     "name" to currData.text_name,
@@ -128,8 +135,8 @@ class ListFragment : Fragment() {
                     "strength" to currData.item_strength,
                     "danger" to currData.dangerous,
                     "type" to currData.item_type,
-                    "humanoids" to currData.humanoids
-                    )
+                    "humanoids" to arrayOf("Human", "NPC", "Orc")
+                )
                 )
 
 
@@ -145,8 +152,18 @@ class ListFragment : Fragment() {
                  */
             }
             holder.itemView.setOnLongClickListener {
-                if (dataRepo.deleteItem(position))
-                    notifyDataSetChanged()
+                val builder: AlertDialog.Builder = AlertDialog.Builder(requireActivity())
+                builder
+                    .setTitle("Delete item")
+                    .setMessage("Are you sure you want to delete?")
+                    //.setSingleChoiceItems()
+                    .setPositiveButton("Yes") { dialog, which ->
+                        if (dataRepo.deleteItem(currData))
+                            notifyDataSetChanged()
+                            requireActivity().recreate()
+                    }.setNegativeButton("No") { dialog, which ->
+                        dialog.cancel()
+                    }.create().show()
                 true
             }
 
@@ -158,15 +175,10 @@ class ListFragment : Fragment() {
         }
     }
 
-
-
-
     companion object {
-        //val publicRepo = this.dataRepo
-
         @JvmStatic
-        fun newInstance() =
-            ListFragment().apply {
+        fun newInstance(param1: String, param2: String) =
+            List4Fragment().apply {
                 arguments = Bundle().apply {
                 }
             }
