@@ -23,7 +23,7 @@ class ImageListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        imageRepo=ImageRepo.getInstance(requireContext())
+        imageRepo = ImageRepo.getInstance(requireContext())
         adapter= ImageListAdapter(requireContext())
     }
 
