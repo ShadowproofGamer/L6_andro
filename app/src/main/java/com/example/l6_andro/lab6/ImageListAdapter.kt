@@ -31,20 +31,20 @@ class ImageListAdapter(private var appContext: Context) : ListAdapter<ImageItem,
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val photo = getItem(position)
+        val image = getItem(position)
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-            photo.curi?.let {
+            image.curi?.let {
                 holder.img.setImageBitmap(appContext.contentResolver.loadThumbnail(it, Size(150, 150), null))
             }
         } else {
-            holder.img.setImageBitmap(getBitmapFromUri(appContext, photo.curi))
+            holder.img.setImageBitmap(getBitmapFromUri(appContext, image.curi))
         }
 
         holder.img.setOnClickListener{
             Navigation.findNavController(holder.itemView)
                 .navigate(R.id.action_imageListFragment_to_imageSliderFragment, Bundle().apply {
-                putString("path", photo.uripath)
+                putString("path", image.uripath)
             })
         }
 
