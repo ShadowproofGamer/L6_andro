@@ -1,12 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.L5_andro" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.L6_andro" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="windowActionModeOverlay">true</item>
     </style>
 
-    <style name="Theme.L5_andro" parent="Base.Theme.L5_andro">
+    <style name="Theme.L6_andro" parent="Base.Theme.L6_andro">
         <item name="windowActionModeOverlay">true</item>
     </style>
 </resources>

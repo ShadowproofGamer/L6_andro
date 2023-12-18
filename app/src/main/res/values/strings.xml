@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">L5_andro</string>
+    <string name="app_name">L6_andro</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="header_title">Here are all the fragments:</string>
     <string name="header_icon_alt">Header drawer icon</string>
     <string name="menuC">Main fragment</string>
-    <string name="menuL">Swipe fragment</string>
+    <string name="menuL">Image list fragment</string>
     <string name="menuR">List fragment</string>
 
 
@@ -56,6 +56,10 @@
 
     <string name="modify_button">Modify</string>
     <string name="image_swipe">Choose your image</string>
+    
+    <string name="photo_menu_ico">Take photo</string>
+    <string name="photo_add">Add Image</string>
+    <string name="photo_prev">Preview Image</string>
 
 
 </resources>

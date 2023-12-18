@@ -10,9 +10,18 @@
 
 
         <!--android:id="@+id/swipe_frag"-->
-        <item
+        <!--item
 
             android:id="@+id/image_swipe_frag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/chevron_left"
+            android:title="@string/menuL"
+
+            app:showAsAction="ifRoom" /-->
+        <item
+
+            android:id="@+id/imageListFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/chevron_left"

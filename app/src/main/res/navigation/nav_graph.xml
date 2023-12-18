@@ -8,26 +8,26 @@
 
     <fragment
         android:id="@+id/add_frag"
-        android:name="com.example.l5_andro.AddFragment"
+        android:name="com.example.l6_andro.AddFragment"
         android:label="Add element"
         tools:layout="@layout/fragment_add" />
     <fragment
         android:id="@+id/swipe_frag"
-        android:name="com.example.l5_andro.SwipeFragment"
+        android:name="com.example.l6_andro.SwipeFragment"
         android:label="Swipe fragment"
         tools:layout="@layout/fragment_swipe" />
     <fragment
         android:id="@+id/show_frag"
-        android:name="com.example.l5_andro.ShowFragment"
+        android:name="com.example.l6_andro.ShowFragment"
         android:label="Element data"
-        tools:layout="@layout/fragment_show" >
+        tools:layout="@layout/fragment_show">
         <action
             android:id="@+id/action_show_frag_to_add_frag"
             app:destination="@id/add_frag" />
     </fragment>
     <fragment
         android:id="@+id/main_frag"
-        android:name="com.example.l5_andro.MainFragment"
+        android:name="com.example.l6_andro.MainFragment"
         android:label="Main fragment"
         tools:layout="@layout/fragment_main" />
     <action
@@ -42,19 +42,19 @@
         app:popUpTo="@id/main_frag" />
     <fragment
         android:id="@+id/fragment1"
-        android:name="com.example.l5_andro.Fragment1"
+        android:name="com.example.l6_andro.lab4.Fragment1"
         android:label="fragment_1"
         tools:layout="@layout/fragment_1" />
     <fragment
         android:id="@+id/fragment2"
-        android:name="com.example.l5_andro.Fragment2"
+        android:name="com.example.l6_andro.lab4.Fragment2"
         android:label="fragment_2"
         tools:layout="@layout/fragment_2" />
     <fragment
         android:id="@+id/list_frag"
-        android:name="com.example.l5_andro.List4Fragment"
+        android:name="com.example.l6_andro.List4Fragment"
         android:label="fragment_list4"
-        tools:layout="@layout/fragment_list4" >
+        tools:layout="@layout/fragment_list4">
         <action
             android:id="@+id/action_list_frag_to_show_frag"
             app:destination="@id/show_frag" />
@@ -69,17 +69,40 @@
         app:popUpTo="@id/main_frag" />
     <fragment
         android:id="@+id/image_frag"
-        android:name="com.example.l5_andro.ImageFragment"
+        android:name="com.example.l6_andro.lab4.ImageFragment"
         android:label="fragment_image"
         tools:layout="@layout/fragment_image" />
     <fragment
-        android:id="@+id/image_swipe_frag"
-        android:name="com.example.l5_andro.ImageSwipeFragment"
+        android:id="@+id/imageListFragment"
+        android:name="com.example.l6_andro.lab4.ImageSwipeFragment"
         android:label="fragment_image_swipe"
         tools:layout="@layout/fragment_image_swipe" />
     <action
         android:id="@+id/action_global_imageSwipeFragment"
-        app:destination="@id/image_swipe_frag"
+        app:destination="@id/imageListFragment"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/main_frag" />
+    <fragment
+        android:id="@+id/imageSliderFragment"
+        android:name="com.example.l6_andro.lab6.ImageSliderFragment"
+        android:label="fragment_image_slider"
+        tools:layout="@layout/fragment_image_slider" />
+    <fragment
+        android:id="@+id/imageListFragment"
+        android:name="com.example.l6_andro.lab6.ImageListFragment"
+        android:label="fragment_image_list"
+        tools:layout="@layout/fragment_image_list">
+        <action
+            android:id="@+id/action_imageListFragment_to_imageSliderFragment"
+            app:destination="@id/imageSliderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addImageFragment"
+        android:name="com.example.l6_andro.lab6.AddImageFragment"
+        android:label="AddImageFragment" />
+    <action
+        android:id="@+id/action_global_imageListFragment"
+        app:destination="@id/imageListFragment"
         app:launchSingleTop="true"
         app:popUpTo="@id/main_frag" />
 </navigation>

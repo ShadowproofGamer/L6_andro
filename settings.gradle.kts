@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "L5_andro"
+rootProject.name = "L6_andro"
 include(":app")
  

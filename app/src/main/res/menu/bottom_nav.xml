@@ -4,7 +4,7 @@
 
     <!-- android:id="@+id/swipe_frag" -->
     <item
-        android:id="@+id/image_swipe_frag"
+        android:id="@+id/imageListFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/chevron_left"
