@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 
 class ImageSliderAdapter (private val photos: MutableList<ImageItem>) : RecyclerView.Adapter<ImageSliderAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_image_slider, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.image_slider_item, parent, false)
         return ViewHolder(view)
     }
 

@@ -35,7 +35,7 @@ class AddImageFragment : Fragment() {
                 result: Bitmap? ->
             if (result != null) {
                 Toast.makeText(requireContext(),"PREVIEW RECEIVED", Toast.LENGTH_LONG).show()
-                _binding.imageView.setImageBitmap(result)
+                _binding.imageViewA.setImageBitmap(result)
             }
             else {
                 Toast.makeText(requireContext(),"PREVIEW NOT RECEIVED", Toast.LENGTH_LONG).show()

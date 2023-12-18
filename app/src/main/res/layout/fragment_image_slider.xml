@@ -6,7 +6,7 @@
     tools:context=".lab6.ImageSliderFragment">
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
+        android:id="@+id/viewPagerSl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

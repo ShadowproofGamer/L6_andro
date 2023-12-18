@@ -29,7 +29,7 @@ class ImageSliderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewPager = view.findViewById(R.id.viewPager)
+        viewPager = view.findViewById(R.id.viewPagerSl)
         imageUrls = imageRepo.getSharedList()!!
 
         val adapter = ImageSliderAdapter(imageUrls)
