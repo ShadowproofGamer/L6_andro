@@ -43,7 +43,7 @@ class ImageListAdapter(private var appContext: Context) : ListAdapter<ImageItem,
 
         holder.img.setOnClickListener{
             Navigation.findNavController(holder.itemView)
-                .navigate(R.id.action_imageListFragment_to_imageSliderFragment, Bundle().apply {
+                .navigate(R.id.action_imageListFragment_to_imageSwipeFragment, Bundle().apply {
                 putString("path", image.uripath)
             })
         }

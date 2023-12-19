@@ -36,6 +36,9 @@ class ImageListFragment : Fragment() {
         recyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(requireContext(), 2)
 
         recyclerView.adapter = adapter
+        _binding.buttonAddImage.setOnClickListener {
+            findNavController().navigate(R.id.addImageFragment)
+        }
         return _binding.root
     }
 

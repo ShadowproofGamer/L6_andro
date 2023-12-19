@@ -5,7 +5,9 @@ import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.util.Size
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -36,26 +38,44 @@ class MainFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = FragmentMainBinding.inflate(inflater, container, false)
-        invitation=view.invitationText
-        authorName=view.authorNameTxt
-        authorSurname=view.authorSurnameTxt
-        imageMain=view.invitationImage
-        setting=view.additionalSetting
+        invitation = view.invitationText
+        authorName = view.authorNameTxt
+        authorSurname = view.authorSurnameTxt
+        imageMain = view.invitationImage
+        setting = view.additionalSetting
 
 
         return view.root
     }
-    fun applyData(){
-        val data: SharedPreferences = requireActivity().getSharedPreferences("L5_preferences", Context.MODE_PRIVATE)
+
+    fun applyData() {
+        val data: SharedPreferences =
+            requireActivity().getSharedPreferences("L5_preferences", Context.MODE_PRIVATE)
         invitation.text = data.getString("invitation", "Fragment to start on")
         authorName.text = data.getString("authorName", "Jakub")
         authorSurname.text = data.getString("authorSurname", "Cebula")
         imageMain.setImageResource(data.getInt("image", R.drawable.emotion_neutral))
-        if(data.contains("imageUri")){
-            imageMain.setImageBitmap(getBitmapFromUri(requireContext(), Uri.parse(data.getString("imageUri", ""))))
+        if (data.contains("imageUri")) {
+            val img = Uri.parse(data.getString("imageUri", ""))
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+                img.let {
+                    imageMain.setImageBitmap(
+                        requireContext().contentResolver.loadThumbnail(
+                            it,
+                            Size(400, 400), null
+                        )
+                    )
+                }
+            } else {
+                val bitmap = getBitmapFromUri(requireContext(), img)
+                if (bitmap != null) {
+                    imageMain.setImageBitmap(bitmap).apply { Size(400, 400) }
+                }
+            }
         }
 
-        val data2: SharedPreferences = requireActivity().getSharedPreferences("additional", Context.MODE_PRIVATE)
+        val data2: SharedPreferences =
+            requireActivity().getSharedPreferences("additional", Context.MODE_PRIVATE)
         setting.text = data2.getString("str2", "Setting Def")
 
     }
@@ -65,6 +85,7 @@ class MainFragment : Fragment() {
         applyData()
 
     }
+
     fun getBitmapFromUri(mContext: Context, uri: Uri?): Bitmap? {
         var bitmap: Bitmap? = null
         try {

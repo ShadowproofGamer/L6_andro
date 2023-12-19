@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var navView: NavigationView
     lateinit var toolbarMain: androidx.appcompat.widget.Toolbar
     lateinit var drawerLayout: DrawerLayout
-    lateinit var bottomNav: BottomNavigationView
+    //lateinit var bottomNav: BottomNavigationView
     lateinit var appBarConfig: AppBarConfiguration
 
     private val REQUEST_CODE = 1
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
         drawerLayout=binding.drawerLayout
         navView = binding.navView
-        bottomNav = binding.bottomMenu
+        //bottomNav = binding.bottomMenu
 
 
         appBarConfig =
@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         // AppBarConfiguration(setOf(R.id.swipe_frag,R.id.main_frag,R.id.list_frag), drawerLayout)
         setupActionBarWithNavController(navController,appBarConfig)
         navView.setupWithNavController(navController)
-        bottomNav.setupWithNavController(navController)
+        //bottomNav.setupWithNavController(navController)
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE)
