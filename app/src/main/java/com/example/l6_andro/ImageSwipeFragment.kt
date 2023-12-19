@@ -1,4 +1,4 @@
-package com.example.l6_andro.lab4
+package com.example.l6_andro
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -7,18 +7,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.l6_andro.R
+import androidx.navigation.fragment.findNavController
 import com.example.l6_andro.databinding.FragmentImageSwipeBinding
+import com.example.l6_andro.lab6.ImageItem
+import com.example.l6_andro.lab6.ImageRepo
 
 class ImageSwipeFragment : Fragment() {
     private lateinit var _binding: FragmentImageSwipeBinding
     private lateinit var _adapter: ImagePagerAdapter
+    private lateinit var imageUrls: MutableList<ImageItem>
+    private lateinit var imageRepo: ImageRepo
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
-        _adapter = ImagePagerAdapter(this)
+        imageRepo = ImageRepo.getInstance(requireContext())
+        imageUrls = imageRepo.getSharedList()!!
+        _adapter = ImagePagerAdapter(this, imageUrls)
     }
 
     override fun onCreateView(
@@ -37,35 +42,27 @@ class ImageSwipeFragment : Fragment() {
 
         viewPager.adapter = _adapter
 
-        //val tabIcons = arrayOf(R.drawable.preferences_1_icon, R.drawable.preferences_2_icon)
+        // Retrieve the photo path from the arguments
+        val photoPath = arguments?.getString("path")
+        // Find the position of the photo in the list
+        val position = imageUrls.indexOfFirst { it.uripath == photoPath }
+        // Set the current item of the ViewPager to this position
+        if (position != -1) {
+            viewPager.setCurrentItem(position, false)
+        }
 
 
 
         _binding.imageSaveButton.setOnClickListener { _ ->
             val item = viewPager.currentItem
-            var image = -1
-
-            when (item) {
-                0 -> image = R.drawable.emotion_neutral
-                1 -> image = R.drawable.enemy_title
-                2 -> image = R.drawable.human_title
-                3 -> image = R.drawable.npc_title
-            }
+            val image = _adapter.getImage(item)
 
             val data: SharedPreferences = requireActivity().getSharedPreferences("L5_preferences", Context.MODE_PRIVATE)
             val editor = data.edit()
-            editor.putInt("image", image)
+            editor.putString("imageUri", image.uripath)
             editor.apply()
-            requireActivity().onBackPressed()
+            findNavController().navigate(R.id.action_global_mainFragment)
         }
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance() =
-            ImageSwipeFragment().apply {
-                arguments = Bundle().apply {
-                }
-            }
-    }
 }

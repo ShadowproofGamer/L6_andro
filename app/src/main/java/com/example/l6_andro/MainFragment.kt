@@ -2,6 +2,9 @@ package com.example.l6_andro
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +13,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.l6_andro.databinding.FragmentMainBinding
+import java.io.FileNotFoundException
+import java.io.InputStream
 
 class MainFragment : Fragment() {
     lateinit var invitation: TextView
@@ -46,6 +51,9 @@ class MainFragment : Fragment() {
         authorName.text = data.getString("authorName", "Jakub")
         authorSurname.text = data.getString("authorSurname", "Cebula")
         imageMain.setImageResource(data.getInt("image", R.drawable.emotion_neutral))
+        if(data.contains("imageUri")){
+            imageMain.setImageBitmap(getBitmapFromUri(requireContext(), Uri.parse(data.getString("imageUri", ""))))
+        }
 
         val data2: SharedPreferences = requireActivity().getSharedPreferences("additional", Context.MODE_PRIVATE)
         setting.text = data2.getString("str2", "Setting Def")
@@ -56,6 +64,23 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         applyData()
 
+    }
+    fun getBitmapFromUri(mContext: Context, uri: Uri?): Bitmap? {
+        var bitmap: Bitmap? = null
+        try {
+            val imageStream: InputStream
+            try {
+                imageStream = uri?.let {
+                    mContext.contentResolver.openInputStream(it)
+                }!!
+                bitmap = BitmapFactory.decodeStream(imageStream)
+            } catch (e: FileNotFoundException) {
+                e.printStackTrace()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return bitmap
     }
 
     companion object {

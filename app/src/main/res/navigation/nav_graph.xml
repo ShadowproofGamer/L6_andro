@@ -13,7 +13,7 @@
         tools:layout="@layout/fragment_add" />
     <fragment
         android:id="@+id/swipe_frag"
-        android:name="com.example.l6_andro.SwipeFragment"
+        android:name="com.example.l6_andro.lab4.SwipeFragment"
         android:label="Swipe fragment"
         tools:layout="@layout/fragment_swipe" />
     <fragment
@@ -69,12 +69,12 @@
         app:popUpTo="@id/main_frag" />
     <fragment
         android:id="@+id/image_frag"
-        android:name="com.example.l6_andro.lab4.ImageFragment"
+        android:name="com.example.l6_andro.ImageFragment"
         android:label="fragment_image"
         tools:layout="@layout/fragment_image" />
     <fragment
         android:id="@+id/imageListFragment"
-        android:name="com.example.l6_andro.lab4.ImageSwipeFragment"
+        android:name="com.example.l6_andro.ImageSwipeFragment"
         android:label="fragment_image_swipe"
         tools:layout="@layout/fragment_image_swipe" />
     <action
@@ -95,6 +95,9 @@
         <action
             android:id="@+id/action_imageListFragment_to_imageSliderFragment"
             app:destination="@id/imageSliderFragment" />
+        <action
+            android:id="@+id/action_imageListFragment_to_swipe_frag"
+            app:destination="@id/swipe_frag" />
     </fragment>
     <fragment
         android:id="@+id/addImageFragment"

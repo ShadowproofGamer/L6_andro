@@ -1,10 +1,8 @@
-package com.example.l6_andro
+package com.example.l6_andro.lab4
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.l6_andro.lab4.Fragment1
-import com.example.l6_andro.lab4.Fragment2
 
 class MyPagerAdapter2(fa: FragmentActivity) : FragmentStateAdapter(fa) {
     companion object {
