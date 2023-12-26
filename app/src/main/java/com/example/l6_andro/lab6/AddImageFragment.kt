@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -57,7 +58,10 @@ class AddImageFragment : Fragment() {
 
     private fun saveImageToExternalStorage() {
         if (Environment.MEDIA_MOUNTED == Environment.getExternalStorageState()) {
-            val externalStorageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+            //val externalStorageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+            val externalStorageDir =
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/Camera")
+
             val newFile = File(externalStorageDir, lastFile.name)
 
             var fis: FileInputStream? = null
@@ -78,9 +82,35 @@ class AddImageFragment : Fragment() {
                 fis?.close()
                 fos?.close()
             }
+            MediaStore.Images.Media.insertImage(requireActivity().contentResolver, newFile.path, newFile.name, newFile.name)
 
             lastFile.delete()
         }
+    }
+    private fun saveImageToInternalStorage() {
+        val internalStorageDir = requireActivity().filesDir
+        val newFile = File(internalStorageDir, lastFile.name)
+
+        var fis: FileInputStream? = null
+        var fos: FileOutputStream? = null
+
+        try {
+            fis = FileInputStream(lastFile)
+            fos = FileOutputStream(newFile)
+
+            val buffer = ByteArray(1024)
+            var length: Int
+            while (fis.read(buffer).also { length = it } > 0) {
+                fos.write(buffer, 0, length)
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        } finally {
+            fis?.close()
+            fos?.close()
+        }
+
+        lastFile.delete()
     }
 
 
@@ -110,7 +140,8 @@ class AddImageFragment : Fragment() {
 
     private fun getNewFileUri(): Uri {
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
-        val storageDir: File? = requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        //val storageDir: File? = requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val storageDir: File? = requireActivity().getExternalFilesDir(Environment.DIRECTORY_DCIM + "/Camera")
         val imageFile = File.createTempFile(
             "JPEG_${timeStamp}_",
             ".jpg",
