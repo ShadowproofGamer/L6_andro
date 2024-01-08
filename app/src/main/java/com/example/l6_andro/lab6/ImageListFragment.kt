@@ -1,5 +1,7 @@
 package com.example.l6_andro.lab6
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -46,7 +48,16 @@ class ImageListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val dataRepo = ImageRepo.getInstance(requireContext())
-        val photoList = dataRepo.getSharedList()
+
+
+        var photoList = dataRepo.getSharedList()
+
+        //TODO shared vs private
+        val list_pref: SharedPreferences = requireActivity().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        var shared_list = list_pref.getBoolean("list_pref", true)
+        if (!shared_list){
+            photoList = dataRepo.getPrivateList()
+        }
 
         if (photoList == null) {
             Toast.makeText(requireContext(), "Invalid Data", Toast.LENGTH_LONG).show()
@@ -66,6 +77,15 @@ class ImageListFragment : Fragment() {
         when (item.itemId){
             R.id.menu_photo_add -> {
                 findNavController().navigate(R.id.addImageFragment)
+            }
+            R.id.chg_priv -> {
+                val list_pref: SharedPreferences = requireActivity().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+                var shared_list = list_pref.getBoolean("list_pref", true)
+                var editor = list_pref.edit()
+                editor.putBoolean("list_pref", !shared_list)
+                editor.apply()
+                requireActivity().recreate()
+
             }
         }
         return super.onOptionsItemSelected(item)

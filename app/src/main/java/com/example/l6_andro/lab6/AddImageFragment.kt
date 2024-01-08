@@ -1,6 +1,8 @@
 package com.example.l6_andro.lab6
 
 import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -49,7 +51,17 @@ class AddImageFragment : Fragment() {
         if (result) {
             // consume result - see later remarks
             Toast.makeText(requireContext(),"Photo TAKEN", Toast.LENGTH_LONG).show()
-            saveImageToExternalStorage()
+
+            //TODO shared vs private
+            val list_pref: SharedPreferences = requireActivity().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+            var shared_list = list_pref.getBoolean("list_pref", true)
+            if (!shared_list){
+                saveImageToInternalStorage()
+            }
+            else {
+                saveImageToExternalStorage()
+            }
+
         }else
         // make some action – warning
             Toast.makeText(requireContext(), "Photo NOT taken!", Toast.LENGTH_LONG).show()
