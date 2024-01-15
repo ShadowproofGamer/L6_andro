@@ -49,14 +49,13 @@ class ImageListFragment : Fragment() {
 
         val dataRepo = ImageRepo.getInstance(requireContext())
 
-
-        var photoList = dataRepo.getSharedList()
-
         //TODO shared vs private
         val list_pref: SharedPreferences = requireActivity().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
         var shared_list = list_pref.getBoolean("list_pref", true)
-        if (!shared_list){
-            photoList = dataRepo.getPrivateList()
+        var photoList = if (!shared_list){
+            dataRepo.getPrivateList()
+        }else{
+            dataRepo.getSharedList()
         }
 
         if (photoList == null) {

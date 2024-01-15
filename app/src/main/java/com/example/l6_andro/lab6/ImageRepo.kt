@@ -13,7 +13,7 @@ class ImageRepo {
 
     fun getSharedList(): MutableList<ImageItem>? {
         uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-        //Toast.makeText(ctx, "priv: $uri", Toast.LENGTH_SHORT).show()
+        Toast.makeText(ctx, "public: $uri", Toast.LENGTH_SHORT).show()
         sharedStoreList?.clear()
 
         val contentResolver: ContentResolver = ctx.contentResolver
@@ -40,8 +40,11 @@ class ImageRepo {
     }
 
     fun getPrivateList(): MutableList<ImageItem>? {
-        uri = MediaStore.Images.Media.INTERNAL_CONTENT_URI
-        //Toast.makeText(ctx, "priv: $uri", Toast.LENGTH_SHORT).show()
+        uri = MediaStore.Images.Media.INTERNAL_CONTENT_URI  // should be:    /data/data/com.example.l6_andro/files or /data/user/0/com.example.l6_andro/files
+        //uri = MediaStore.Images.Media.getContentUri("files")
+        //uri = Uri.parse("content:///data/data/com.example.l6_andro/files")
+        //uri = Uri.parse(ctx.filesDir.absolutePath)
+        Toast.makeText(ctx, "priv: $uri", Toast.LENGTH_SHORT).show()
         privateStoreList?.clear()
 
         val contentResolver: ContentResolver = ctx.contentResolver
